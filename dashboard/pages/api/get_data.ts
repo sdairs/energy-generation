@@ -15,7 +15,7 @@ async function handler(
     const first = now.subtract(30, 'minute').format('YYYY-MM-DDTHH:mm[Z]');
     const second = now.subtract(60, 'minute').format('YYYY-MM-DDTHH:mm[Z]');
 
-    console.log(fetch(generation_url + first));
+    console.log(await fetch(generation_url + first));
 
     res.status(200).end();
 }
