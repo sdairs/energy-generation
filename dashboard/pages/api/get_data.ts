@@ -110,9 +110,9 @@ function intensityTransform(data: any) {
     return {
         time_from: data.from,
         time_to: data.to,
-        intensity_actual: data.intensity.actual,
-        intensity_forecast: data.intensity.forecast,
-        intensity_index: data.intensity.index,
+        intensity_actual: data.intensity.actual ?? 0,
+        intensity_forecast: data.intensity.forecast ?? 0,
+        intensity_index: data.intensity.index ?? 'unknown',
     };
 }
 
@@ -122,14 +122,13 @@ function generationTransform(data: any) {
         time_to: data.to,
     }
     data.generationmix.forEach((item: any) => {
-        transform[item.fuel] = item.perc;
+        transform[item.fuel] = item.perc ?? 0;
     })
     return transform;
 }
 
 
 async function sendToTinybird(data: any, datasource: string) {
-    console.log(data);
     fetch(
         `https://api.tinybird.co/v0/events?name=${datasource}`,
         {
