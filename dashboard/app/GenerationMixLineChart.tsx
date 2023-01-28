@@ -30,7 +30,6 @@ const dataFormatter = (number: number) =>
 
 export default () => (
     <Card>
-        <Title>Population growth rate (1951 to 2021)</Title>
         <LineChart
             data={chartdata}
             dataKey="year"

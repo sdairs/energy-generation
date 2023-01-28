@@ -7,6 +7,8 @@ import {
   ColGrid,
 } from '@tremor/react';
 import GenerationMixLineChart from './GenerationMixLineChart';
+import GenerationMixPieChart from './GenerationMixPieChart';
+import GenerationMixBarList from './GenerationMixBarList';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,15 +18,18 @@ export default function Home() {
       <Title>Energy Generation</Title>
 
       <Card marginTop="mt-6">
+        <Title>Generation Mix Over Time</Title>
         <GenerationMixLineChart />
       </Card>
 
       <ColGrid numColsMd={2} gapX="gap-x-6" gapY="gap-y-6" marginTop="mt-6">
         <Card>
-          <div className="h-28" />
+          <Title>Latest Generation Mix</Title>
+          <GenerationMixPieChart />
         </Card>
         <Card>
-          <div className="h-28" />
+          <Title>Generation Breakdown</Title>
+          <GenerationMixBarList />
         </Card>
       </ColGrid>
     </main>
