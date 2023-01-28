@@ -14,6 +14,17 @@ const intensity_url = 'https://api.carbonintensity.org.uk/intensity/';
 //         index: string
 //     }
 // }
+// {
+//     "data": [{
+//         "from": "2023-01-28T19:00Z",
+//         "to": "2023-01-28T19:30Z",
+//         "intensity": {
+//             "forecast": 256,
+//             "actual": 262,
+//             "index": "high"
+//         }
+//     }]
+// }
 
 // type generationData = {
 //     from: string,
@@ -23,6 +34,52 @@ const intensity_url = 'https://api.carbonintensity.org.uk/intensity/';
 //         actual: number,
 //         index: string
 //     }
+// }
+// {
+//     "data": [
+//         {
+//             "from": "2023-01-28T18:30Z",
+//             "to": "2023-01-28T19:00Z",
+//             "generationmix": [
+//                 {
+//                     "fuel": "biomass",
+//                     "perc": 5.3
+//                 },
+//                 {
+//                     "fuel": "coal",
+//                     "perc": 2.5
+//                 },
+//                 {
+//                     "fuel": "imports",
+//                     "perc": 13.4
+//                 },
+//                 {
+//                     "fuel": "gas",
+//                     "perc": 53.3
+//                 },
+//                 {
+//                     "fuel": "nuclear",
+//                     "perc": 12.3
+//                 },
+//                 {
+//                     "fuel": "other",
+//                     "perc": 0
+//                 },
+//                 {
+//                     "fuel": "hydro",
+//                     "perc": 4.3
+//                 },
+//                 {
+//                     "fuel": "solar",
+//                     "perc": 0
+//                 },
+//                 {
+//                     "fuel": "wind",
+//                     "perc": 8.8
+//                 }
+//             ]
+//         }
+//     ]
 // }
 
 async function handler(
