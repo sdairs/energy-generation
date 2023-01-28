@@ -9,6 +9,7 @@ specifiers:
   '@upstash/qstash': ^0.3.4
   autoprefixer: ^10.4.13
   daisyui: ^2.49.0
+  dayjs: ^1.11.7
   eslint: 8.32.0
   eslint-config-next: 13.1.6
   next: 13.1.6
@@ -27,6 +28,7 @@ dependencies:
   '@types/react-dom': 18.0.10
   '@upstash/qstash': 0.3.4
   daisyui: 2.49.0_gbtt6ss3tbiz4yjtvdr6fbrj44
+  dayjs: 1.11.7
   eslint: 8.32.0
   eslint-config-next: 13.1.6_7uibuqfxkfaozanbtbziikiqje
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
@@ -815,6 +817,10 @@ packages:
   /date-fns/2.29.3:
     resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
     engines: {node: '>=0.11'}
+    dev: false
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
     dev: false
 
   /debug/3.2.7:
