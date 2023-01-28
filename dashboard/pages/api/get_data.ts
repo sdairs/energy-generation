@@ -60,7 +60,7 @@ function intensityTransform(data: any) {
 }
 
 function generationTransform(data: any) {
-    let transform = {
+    let transform: any = {
         time_from: data.from,
         time_to: data.to,
     }
