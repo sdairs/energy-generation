@@ -6,6 +6,7 @@ import {
   Text,
   ColGrid,
 } from '@tremor/react';
+import GenerationMixLineChart from './GenerationMixLineChart';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +16,7 @@ export default function Home() {
       <Title>Energy Generation</Title>
 
       <Card marginTop="mt-6">
-        <div className="h-96" />
+        <GenerationMixLineChart />
       </Card>
 
       <ColGrid numColsMd={2} gapX="gap-x-6" gapY="gap-y-6" marginTop="mt-6">
