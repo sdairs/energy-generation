@@ -1,48 +1,38 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Card, Title, DonutChart } from '@tremor/react';
 
-const cities = [
-    {
-        name: 'New York',
-        sales: 9800,
-    },
-    {
-        name: 'London',
-        sales: 4567,
-    },
-    {
-        name: 'Hong Kong',
-        sales: 3908,
-    },
-    {
-        name: 'San Francisco',
-        sales: 2400,
-    },
-    {
-        name: 'Singapore',
-        sales: 1908,
-    },
-    {
-        name: 'Zurich',
-        sales: 1398,
-    },
-];
+export default function GenerationMixPieChart() {
+    const [chartdata, setChartdata] = useState([{}]);
 
-const valueFormatter = (number: number) => (
-    `$ ${Intl.NumberFormat('us').format(number).toString()}`
-);
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch('https://api.tinybird.co/v0/pipes/generation_mix_api.json?token=p.eyJ1IjogIjc4ZmVhOGY5LTkzNzYtNDQzMC1iNTUwLTA0YTU5MWM2ZTFjZSIsICJpZCI6ICJiYWFhZWNiYy1kMjk0LTQyM2QtOTc0Ny1lZjBiNDQyMDFmYTMifQ.wkD8QpT_oXE5UqEB92a9APCZOhBx_mN92PpWu3lkMQI&latest=true');
+            const { data } = await res.json();
+            const keys = ["coal", "gas", "biomass", "hydro", "imports", "nuclear", "solar", "other", "wind"];
+            let transform: any = [];
+            keys.forEach((key) => {
+                transform.push({
+                    group: key,
+                    value: data[0][key]
+                })
+            })
+            setChartdata(transform)
+        }
+        fetchData();
+    }, []);
 
-export default () => (
-    <Card maxWidth="max-w-lg">
-        <DonutChart
-            data={cities}
-            category="sales"
-            dataKey="name"
-            valueFormatter={valueFormatter}
-            marginTop="mt-6"
-            colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
-            variant="pie"
-        />
-    </Card>
-);
+    return (
+        <Card maxWidth="max-w-lg">
+            <DonutChart
+                data={chartdata}
+                category="value"
+                dataKey="group"
+                marginTop="mt-6"
+                colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
+                variant="pie"
+            />
+        </Card>
+    )
+};

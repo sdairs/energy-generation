@@ -1,43 +1,32 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Card, Title, LineChart } from "@tremor/react";
+import dayjs from 'dayjs';
 
-const chartdata = [
-    {
-        year: 1951,
-        "Population growth rate": 1.74,
-    },
-    {
-        year: 1952,
-        "Population growth rate": 1.93,
-    },
-    {
-        year: 1953,
-        "Population growth rate": 1.9,
-    },
-    {
-        year: 1954,
-        "Population growth rate": 1.98,
-    },
-    {
-        year: 1955,
-        "Population growth rate": 2,
-    },
-];
+export default function GenerationMixLineChart() {
+    const [chartdata, setChartdata] = useState([]);
 
-const dataFormatter = (number: number) =>
-    `${Intl.NumberFormat("us").format(number).toString()}%`;
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await fetch('https://api.tinybird.co/v0/pipes/generation_mix_api.json?token=p.eyJ1IjogIjc4ZmVhOGY5LTkzNzYtNDQzMC1iNTUwLTA0YTU5MWM2ZTFjZSIsICJpZCI6ICJiYWFhZWNiYy1kMjk0LTQyM2QtOTc0Ny1lZjBiNDQyMDFmYTMifQ.wkD8QpT_oXE5UqEB92a9APCZOhBx_mN92PpWu3lkMQI');
+            const { data } = await res.json();
+            setChartdata(data)
+        }
+        fetchData();
+    }, []);
 
-export default () => (
-    <Card>
-        <LineChart
-            data={chartdata}
-            dataKey="year"
-            categories={["Population growth rate"]}
-            colors={["blue"]}
-            valueFormatter={dataFormatter}
-            marginTop="mt-6"
-            yAxisWidth="w-10"
-        />
-    </Card>
-);
+    return (
+        <Card>
+            <LineChart
+                dataKey="time_from"
+                data={chartdata}
+                categories={["coal", "gas", "biomass", "hydro", "imports", "nuclear", "solar", "other", "wind"]}
+                colors={["blue"]}
+                // valueFormatter={dataFormatter}
+                marginTop="mt-6"
+                yAxisWidth="w-10"
+            />
+        </Card>
+    )
+};
