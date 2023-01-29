@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, LineChart } from "@tremor/react";
+import { LineChart } from "@tremor/react";
 
 export default function GenerationMixLineChart() {
     const [chartdata, setChartdata] = useState([]);
@@ -16,12 +16,10 @@ export default function GenerationMixLineChart() {
     }, []);
 
     return (
-        <Card>
-            <LineChart
-                dataKey="time_from"
-                data={chartdata}
-                categories={["coal", "gas", "biomass", "hydro", "imports", "nuclear", "solar", "other", "wind"]}
-            />
-        </Card>
+        <LineChart
+            dataKey="time_from"
+            data={chartdata}
+            categories={["coal", "gas", "biomass", "hydro", "imports", "nuclear", "solar", "other", "wind"]}
+        />
     )
 };
