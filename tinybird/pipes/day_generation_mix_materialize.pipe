@@ -1,0 +1,27 @@
+NODE mv
+SQL >
+
+    SELECT
+        time_from,
+        floor(toFloat32(coal), 1) AS coal,
+        floor(toFloat32(gas), 1) AS gas,
+        floor(toFloat32(generation.coal + generation.gas), 1) AS fossils,
+        floor(toFloat32(hydro), 1) AS hydro,
+        floor(toFloat32(solar), 1) AS solar,
+        floor(toFloat32(wind), 1) AS wind,
+        floor(toFloat32((generation.hydro + generation.solar) + generation.wind), 1) AS renewables,
+        floor(toFloat32(other), 1) AS other,
+        floor(toFloat32(imports), 1) AS imports,
+        floor(toFloat32(nuclear), 1) AS nuclear,
+        floor(toFloat32(biomass), 1) AS biomass,
+        floor(toFloat32(((generation.other + generation.imports) + generation.nuclear) + generation.biomass), 1) AS other_sources
+    FROM generation
+    ORDER BY time_from ASC
+
+TYPE materialized
+DATASOURCE day_generation_mix_mv
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(time_from)"
+ENGINE_SORTING_KEY "time_from"
+ENGINE_TTL "time_from + toIntervalDay(1)"
+

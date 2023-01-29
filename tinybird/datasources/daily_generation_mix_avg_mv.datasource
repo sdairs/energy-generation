@@ -1,0 +1,21 @@
+# Data Source created from Pipe 'daily_generation_mix_avg_materialize'
+
+SCHEMA >
+    `time_from` DateTime,
+    `coal` Float32,
+    `gas` Float32,
+    `fossils` Float32,
+    `hydro` Float32,
+    `solar` Float32,
+    `wind` Float32,
+    `renewables` Float32,
+    `other` Float32,
+    `imports` Float32,
+    `nuclear` Float32,
+    `biomass` Float32,
+    `other_sources` Float32
+
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(time_from)"
+ENGINE_SORTING_KEY "time_from"
+ENGINE_TTL "time_from + toIntervalDay(731)"

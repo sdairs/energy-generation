@@ -1,0 +1,28 @@
+NODE mv
+SQL >
+
+    SELECT
+        toStartOfDay(time_from) AS time_from,
+        floor(toFloat32(avg(coal)), 1) AS coal,
+        floor(toFloat32(avg(gas)), 1) AS gas,
+        floor(toFloat32(avg(generation.coal + generation.gas)), 1) AS fossils,
+        floor(toFloat32(avg(hydro)), 1) AS hydro,
+        floor(toFloat32(avg(solar)), 1) AS solar,
+        floor(toFloat32(avg(wind)), 1) AS wind,
+        floor(toFloat32(avg((generation.hydro + generation.solar) + generation.wind)), 1) AS renewables,
+        floor(toFloat32(avg(other)), 1) AS other,
+        floor(toFloat32(avg(imports)), 1) AS imports,
+        floor(toFloat32(avg(nuclear)), 1) AS nuclear,
+        floor(toFloat32(avg(biomass)), 1) AS biomass,
+        floor(toFloat32(avg(((generation.other + generation.imports) + generation.nuclear) + generation.biomass)), 1) AS other_sources
+    FROM generation
+    GROUP BY time_from
+    ORDER BY time_from ASC
+
+TYPE materialized
+DATASOURCE daily_generation_mix_avg_mv
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(time_from)"
+ENGINE_SORTING_KEY "time_from"
+ENGINE_TTL "time_from + toIntervalDay(731)"
+
