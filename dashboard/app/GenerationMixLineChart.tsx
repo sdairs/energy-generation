@@ -21,9 +21,6 @@ export default function GenerationMixLineChart() {
                 dataKey="time_from"
                 data={chartdata}
                 categories={["coal", "gas", "biomass", "hydro", "imports", "nuclear", "solar", "other", "wind"]}
-                colors={["blue"]}
-                marginTop="mt-6"
-                yAxisWidth="w-10"
             />
         </Card>
     )

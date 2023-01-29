@@ -24,13 +24,11 @@ export default function GenerationMixPieChart() {
     }, []);
 
     return (
-        <Card maxWidth="max-w-lg">
+        <Card>
             <DonutChart
                 data={chartdata}
                 category="value"
                 dataKey="group"
-                marginTop="mt-6"
-                colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
                 variant="pie"
             />
         </Card>

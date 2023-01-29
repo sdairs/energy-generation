@@ -59,19 +59,19 @@ export default function GenerationMixBarList() {
   return (
     <div>
       <div className="grid rounded">
-        <Card maxWidth="max-w-lg">
+        <Card>
           <Title>Fossils ({fossils_total}%)</Title>
           <BarList data={fossils_data} marginTop="mt-2" />
         </Card>
       </div>
       <div className="grid rounded">
-        <Card maxWidth="max-w-lg">
+        <Card>
           <Title>Renewables ({renewables_total}%)</Title>
           <BarList data={renewables_data} marginTop="mt-2" />
         </Card>
       </div>
       <div className="grid rounded">
-        <Card maxWidth="max-w-lg">
+        <Card>
           <Title>Other ({other_total}%)</Title>
           <BarList data={other_data} marginTop="mt-2" />
         </Card>
