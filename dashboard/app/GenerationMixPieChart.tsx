@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Title, DonutChart } from '@tremor/react';
+import { Card, DonutChart } from '@tremor/react';
 
 export default function GenerationMixPieChart() {
     const [chartdata, setChartdata] = useState([{}]);

@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, Title, LineChart } from "@tremor/react";
-import dayjs from 'dayjs';
+import { Card, LineChart } from "@tremor/react";
 
 export default function GenerationMixLineChart() {
     const [chartdata, setChartdata] = useState([]);
@@ -23,7 +22,6 @@ export default function GenerationMixLineChart() {
                 data={chartdata}
                 categories={["coal", "gas", "biomass", "hydro", "imports", "nuclear", "solar", "other", "wind"]}
                 colors={["blue"]}
-                // valueFormatter={dataFormatter}
                 marginTop="mt-6"
                 yAxisWidth="w-10"
             />

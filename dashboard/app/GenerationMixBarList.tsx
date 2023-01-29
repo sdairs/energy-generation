@@ -5,15 +5,7 @@ import {
   BarList,
   Card,
   Title,
-  Bold,
-  Flex,
-  Text,
 } from '@tremor/react';
-
-const data = [
-  { name: 'Source 1', value: 456 },
-  { name: 'Source 2', value: 351 },
-];
 
 export default function GenerationMixBarList() {
   const [fossils_data, set_fossils_data] = useState([]);
