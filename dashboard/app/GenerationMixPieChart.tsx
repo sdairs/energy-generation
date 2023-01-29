@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { DonutChart } from '@tremor/react';
+import { Card, DonutChart, Title } from '@tremor/react';
 
 export default function GenerationMixPieChart() {
     const [chartdata, setChartdata] = useState([{}]);
@@ -24,11 +24,17 @@ export default function GenerationMixPieChart() {
     }, []);
 
     return (
-        <DonutChart
-            data={chartdata}
-            category="value"
-            dataKey="group"
-            variant="pie"
-        />
+        <Card>
+            <Title>Latest Generation Mix</Title>
+            <div className="mt-24 h-auto">
+                <DonutChart
+                    data={chartdata}
+                    category="value"
+                    dataKey="group"
+                    variant="pie"
+                    height="h-96"
+                />
+            </div>
+        </Card>
     )
 };

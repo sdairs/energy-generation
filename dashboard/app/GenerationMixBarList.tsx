@@ -57,7 +57,8 @@ export default function GenerationMixBarList() {
   }, []);
 
   return (
-    <div>
+    <Card>
+      <Title> Generation Breakdown </Title>
       <div className="grid rounded">
         <Card>
           <Title>Fossils ({fossils_total}%)</Title>
@@ -76,7 +77,7 @@ export default function GenerationMixBarList() {
           <BarList data={other_data} marginTop="mt-2" />
         </Card>
       </div>
-    </div>
+    </Card>
   )
 };
 
