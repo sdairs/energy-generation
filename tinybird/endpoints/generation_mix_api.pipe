@@ -12,6 +12,7 @@ NODE one_day
 SQL >
 
     SELECT * FROM day_generation_mix_mv
+    WHERE time_from > now() - interval 1 day
 
 
 
