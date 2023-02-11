@@ -1,7 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Block, Flex, LineChart, Title, Toggle, Text, ToggleItem, Card } from "@tremor/react";
+import { Block, Flex, Title, Toggle, Color, ToggleItem, Card, AreaChart } from "@tremor/react";
+
+const categoryColorMap: Record<string, Color> = {
+    coal: "zinc",
+    gas: "slate",
+    hydro: "lime",
+    solar: "green",
+    wind: "emerald",
+    biomass: "cyan",
+    nuclear: "sky",
+    other: "blue",
+    imports: "orange",
+};
 
 export default function GenerationMixLineChart() {
     const [chartdata, setChartdata] = useState([]);
@@ -39,10 +51,11 @@ export default function GenerationMixLineChart() {
                     </Toggle>
                 </div>
             </div>
-            <LineChart
+            <AreaChart
                 dataKey="time_from"
                 data={chartdata}
-                categories={["coal", "gas", "biomass", "hydro", "imports", "nuclear", "solar", "other", "wind"]}
+                categories={["coal", "gas", "hydro", "solar", "wind", "biomass", "nuclear", "other", "imports"]}
+                colors={Object.values(categoryColorMap)}
             />
         </Card>
 

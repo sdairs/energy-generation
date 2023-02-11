@@ -65,19 +65,19 @@ export default function GenerationMixBarList() {
         <Accordion expanded={true} >
           <AccordionHeader>Fossils ({fossils_total}%)</AccordionHeader>
           <AccordionBody>
-            <BarList data={fossils_data} valueFormatter={(v) => `${v}%`} marginTop="mt-2" />
+            <BarList data={fossils_data} valueFormatter={(v) => `${v}%`} color="gray" marginTop="mt-2" />
           </AccordionBody>
         </Accordion>
         <Accordion expanded={true} >
           <AccordionHeader>Renewables ({renewables_total}%)</AccordionHeader>
           <AccordionBody>
-            <BarList data={renewables_data} valueFormatter={(v) => `${v}%`} marginTop="mt-2" />
+            <BarList data={renewables_data} valueFormatter={(v) => `${v}%`} color="green" marginTop="mt-2" />
           </AccordionBody>
         </Accordion>
         <Accordion expanded={true} >
           <AccordionHeader>Other ({other_total}%)</AccordionHeader>
           <AccordionBody>
-            <BarList data={other_data} valueFormatter={(v) => `${v}%`} marginTop="mt-2" />
+            <BarList data={other_data} valueFormatter={(v) => `${v}%`} color="blue" marginTop="mt-2" />
           </AccordionBody>
         </Accordion>
       </AccordionList>
