@@ -4,7 +4,10 @@ import { useState, useEffect } from 'react';
 import {
   BarList,
   Card,
-  Title,
+  AccordionList,
+  Accordion,
+  AccordionHeader,
+  AccordionBody
 } from '@tremor/react';
 
 export default function GenerationMixBarList() {
@@ -58,25 +61,26 @@ export default function GenerationMixBarList() {
 
   return (
     <Card>
-      <Title> Generation Breakdown </Title>
-      <div className="grid rounded">
-        <Card>
-          <Title>Fossils ({fossils_total}%)</Title>
-          <BarList data={fossils_data} marginTop="mt-2" />
-        </Card>
-      </div>
-      <div className="grid rounded">
-        <Card>
-          <Title>Renewables ({renewables_total}%)</Title>
-          <BarList data={renewables_data} marginTop="mt-2" />
-        </Card>
-      </div>
-      <div className="grid rounded">
-        <Card>
-          <Title>Other ({other_total}%)</Title>
-          <BarList data={other_data} marginTop="mt-2" />
-        </Card>
-      </div>
+      <AccordionList>
+        <Accordion expanded={true} >
+          <AccordionHeader>Fossils ({fossils_total}%)</AccordionHeader>
+          <AccordionBody>
+            <BarList data={fossils_data} valueFormatter={(v) => `${v}%`} marginTop="mt-2" />
+          </AccordionBody>
+        </Accordion>
+        <Accordion expanded={true} >
+          <AccordionHeader>Renewables ({renewables_total}%)</AccordionHeader>
+          <AccordionBody>
+            <BarList data={renewables_data} valueFormatter={(v) => `${v}%`} marginTop="mt-2" />
+          </AccordionBody>
+        </Accordion>
+        <Accordion expanded={true} >
+          <AccordionHeader>Other ({other_total}%)</AccordionHeader>
+          <AccordionBody>
+            <BarList data={other_data} valueFormatter={(v) => `${v}%`} marginTop="mt-2" />
+          </AccordionBody>
+        </Accordion>
+      </AccordionList>
     </Card>
   )
 };
