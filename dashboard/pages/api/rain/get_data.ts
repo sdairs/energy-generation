@@ -10,8 +10,10 @@ async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    console.log("handler")
     const since = dayjs().subtract(12, 'hour').format('YYYY-MM-DDTHH:mm:ss');
     station_ids.forEach(async (station_id) => {
+        console.log("station_id")
         const uri = base_url + `/id/stations/${station_id}/readings?_sorted&since=${since}Z`;
         await fetch(base_url + uri)
             .then((response) => response.json())
