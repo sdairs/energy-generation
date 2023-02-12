@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import dayjs from 'dayjs';
 
 const base_url = "http://environment.data.gov.uk/flood-monitoring";
-// const intensity_url = 'https://api.carbonintensity.org.uk/intensity/';
 
 const station_ids = ["E21589", "E9350", "47106", "1332", "490001TP", "062916", "603111"]
 
@@ -22,7 +21,7 @@ async function handler(
 }
 
 function measureTransform(data: any, station_id: string) {
-    let transform: any[] = []
+    let transform: any[] = [];
     data.forEach((item: any) => {
         transform.push({
             "station_id": station_id,
@@ -30,11 +29,11 @@ function measureTransform(data: any, station_id: string) {
             "measure": item.value
         });
     })
+    console.log(transform);
     return transform;
 }
 
 async function sendToTinybird(data: any, datasource: string) {
-
     fetch(
         `https://api.tinybird.co/v0/events?name=${datasource}`,
         {
