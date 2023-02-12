@@ -1,0 +1,84 @@
+DESCRIPTION >
+	Provides access to data that shows the...
+Use `param_from` & `param_to` to supply a date range for Time Series data
+Use `latest` to get a single row representing the latest generation mix data
+
+
+TOKEN "rainfall_api_endpoint_read_9597" READ
+
+NODE one_day
+SQL >
+
+    SELECT *
+    FROM rainfall_measures
+    WHERE time_from > now() - interval 1 day
+    ORDER BY station_id, time_from ASC
+
+
+
+NODE one_week
+SQL >
+
+    SELECT time_from, station_id, floor(toFloat32(avgMerge(measure)), 1) AS measure
+    FROM daily_rainfall_per_station_avg_mv
+    WHERE time_from >= now() - interval 7 day
+    GROUP BY station_id, time_from
+    ORDER BY station_id, time_from ASC
+
+
+
+NODE one_year
+SQL >
+
+    SELECT time_from, station_id, floor(toFloat32(avgMerge(measure)), 1) AS measure
+    FROM daily_rainfall_per_station_avg_mv
+    WHERE time_from >= now() - interval 365 day
+    GROUP BY station_id, time_from
+    ORDER BY station_id, time_from ASC
+
+
+
+NODE one_decade
+SQL >
+
+    SELECT time_from, station_id, floor(toFloat32(avgMerge(measure)), 1) AS measure
+    FROM monthly_rainfall_per_station_avg_mv
+    WHERE time_from >= now() - interval 10 year
+    GROUP BY station_id, time_from
+    ORDER BY station_id, time_from ASC
+
+
+
+NODE latest
+SQL >
+
+    SELECT
+        argMax(measure, rainfall_measures.time_from) as measure,
+        station_id,
+        argMax(time_from, time_from) as time_from
+    FROM rainfall_measures
+    GROUP BY station_id
+
+
+
+NODE endpoint
+SQL >
+
+    %
+    SELECT *
+    FROM
+    {% if defined(latest) %}
+    latest
+    {% elif defined(day) %}
+    one_day
+    {% elif defined(week) %}
+    one_week
+    {% elif defined(year) %}
+    one_year
+    {% elif defined(decade) %}
+    one_decade
+    {% else %}
+    one_day
+    {% end %}
+
+

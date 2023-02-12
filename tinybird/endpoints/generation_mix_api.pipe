@@ -19,9 +19,23 @@ SQL >
 NODE one_week
 SQL >
 
-    SELECT *
+    SELECT 
+        time_from,
+        floor(toFloat32(avgMerge(coal)), 1) AS coal,
+        floor(toFloat32(avgMerge(gas)), 1) AS gas,
+        floor(toFloat32(avgMerge(fossils)), 1) AS fossils,
+        floor(toFloat32(avgMerge(hydro)), 1) AS hydro,
+        floor(toFloat32(avgMerge(solar)), 1) AS solar,
+        floor(toFloat32(avgMerge(wind)), 1) AS wind,
+        floor(toFloat32(avgMerge(renewables)), 1) AS renewables,
+        floor(toFloat32(avgMerge(other)), 1) AS other,
+        floor(toFloat32(avgMerge(imports)), 1) AS imports,
+        floor(toFloat32(avgMerge(nuclear)), 1) AS nuclear,
+        floor(toFloat32(avgMerge(biomass)), 1) AS biomass,
+        floor(toFloat32(avgMerge(other_sources)), 1) AS other_sources
     FROM daily_generation_mix_avg_mv
     WHERE time_from >= now() - interval 7 day
+    GROUP BY time_from
     ORDER BY time_from ASC
 
 
@@ -29,9 +43,23 @@ SQL >
 NODE one_year
 SQL >
 
-    SELECT *
+    SELECT 
+        time_from,
+        floor(toFloat32(avgMerge(coal)), 1) AS coal,
+        floor(toFloat32(avgMerge(gas)), 1) AS gas,
+        floor(toFloat32(avgMerge(fossils)), 1) AS fossils,
+        floor(toFloat32(avgMerge(hydro)), 1) AS hydro,
+        floor(toFloat32(avgMerge(solar)), 1) AS solar,
+        floor(toFloat32(avgMerge(wind)), 1) AS wind,
+        floor(toFloat32(avgMerge(renewables)), 1) AS renewables,
+        floor(toFloat32(avgMerge(other)), 1) AS other,
+        floor(toFloat32(avgMerge(imports)), 1) AS imports,
+        floor(toFloat32(avgMerge(nuclear)), 1) AS nuclear,
+        floor(toFloat32(avgMerge(biomass)), 1) AS biomass,
+        floor(toFloat32(avgMerge(other_sources)), 1) AS other_sources
     FROM daily_generation_mix_avg_mv
     WHERE time_from >= now() - interval 365 day
+    GROUP BY time_from
     ORDER BY time_from ASC
 
 
@@ -39,9 +67,23 @@ SQL >
 NODE one_decade
 SQL >
 
-    SELECT *
+    SELECT
+        time_from,
+        floor(toFloat32(avgMerge(coal)), 1) AS coal,
+        floor(toFloat32(avgMerge(gas)), 1) AS gas,
+        floor(toFloat32(avgMerge(fossils)), 1) AS fossils,
+        floor(toFloat32(avgMerge(hydro)), 1) AS hydro,
+        floor(toFloat32(avgMerge(solar)), 1) AS solar,
+        floor(toFloat32(avgMerge(wind)), 1) AS wind,
+        floor(toFloat32(avgMerge(renewables)), 1) AS renewables,
+        floor(toFloat32(avgMerge(other)), 1) AS other,
+        floor(toFloat32(avgMerge(imports)), 1) AS imports,
+        floor(toFloat32(avgMerge(nuclear)), 1) AS nuclear,
+        floor(toFloat32(avgMerge(biomass)), 1) AS biomass,
+        floor(toFloat32(avgMerge(other_sources)), 1) AS other_sources
     FROM monthly_generation_mix_avg_mv
     WHERE time_from >= now() - interval 10 year
+    GROUP BY time_from
     ORDER BY time_from ASC
 
 

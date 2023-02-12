@@ -1,0 +1,10 @@
+# Data Source created from Pipe 'monthly_rainfall_per_station_avg_materialize'
+
+SCHEMA >
+    `time_from` Date,
+    `measure` AggregateFunction(avg, Float32),
+    `station_id` String
+
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYear(time_from)"
+ENGINE_SORTING_KEY "station_id, time_from"

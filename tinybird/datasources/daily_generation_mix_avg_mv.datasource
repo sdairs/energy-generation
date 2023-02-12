@@ -2,20 +2,19 @@
 
 SCHEMA >
     `time_from` DateTime,
-    `coal` Float32,
-    `gas` Float32,
-    `fossils` Float32,
-    `hydro` Float32,
-    `solar` Float32,
-    `wind` Float32,
-    `renewables` Float32,
-    `other` Float32,
-    `imports` Float32,
-    `nuclear` Float32,
-    `biomass` Float32,
-    `other_sources` Float32
+    `coal` AggregateFunction(avg, Float32),
+    `gas` AggregateFunction(avg, Float32),
+    `fossils` AggregateFunction(avg, Float64),
+    `hydro` AggregateFunction(avg, Float32),
+    `solar` AggregateFunction(avg, Float32),
+    `wind` AggregateFunction(avg, Float32),
+    `renewables` AggregateFunction(avg, Float64),
+    `other` AggregateFunction(avg, Float32),
+    `imports` AggregateFunction(avg, Float32),
+    `nuclear` AggregateFunction(avg, Float32),
+    `biomass` AggregateFunction(avg, Float32),
+    `other_sources` AggregateFunction(avg, Float64)
 
 ENGINE "AggregatingMergeTree"
-ENGINE_PARTITION_KEY "toYYYYMM(time_from)"
+ENGINE_PARTITION_KEY "toYear(time_from)"
 ENGINE_SORTING_KEY "time_from"
-ENGINE_TTL "time_from + toIntervalDay(731)"

@@ -1,3 +1,4 @@
+TOKEN data_ingest APPEND
 
 SCHEMA >
     `lat` Float32,
