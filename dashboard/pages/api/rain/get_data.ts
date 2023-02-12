@@ -30,20 +30,20 @@ function measureTransform(data: any, station_id: string) {
             "measure": item.value
         });
     })
-    console.log(transform);
     return transform;
 }
 
 async function sendToTinybird(data: any, datasource: string) {
     console.log("sendToTinybird")
-    fetch(
+    console.log(data.map(JSON.stringify).join('\n'))
+    await fetch(
         `https://api.tinybird.co/v0/events?name=${datasource}`,
         {
             method: 'POST',
             body: data.map(JSON.stringify).join('\n'),
             headers: { Authorization: `Bearer ${process.env.TINYBIRD_TOKEN}` }
         }
-    );
+    ).then((response) => console.log(response.status));
 }
 
 export default verifySignature(handler);
