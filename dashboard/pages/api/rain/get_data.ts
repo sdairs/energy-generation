@@ -14,8 +14,9 @@ async function handler(
     const since = dayjs().subtract(12, 'hour').format('YYYY-MM-DDTHH:mm:ss');
     for (const station_id in station_ids) {
         console.log(station_id)
-        const uri = base_url + `/id/stations/${station_id}/readings?_sorted&since=${since}Z`;
-        await fetch(base_url + uri)
+        const url = base_url + `/id/stations/${station_id}/readings?_sorted&since=${since}Z`;
+        console.log(url)
+        await fetch(url)
             .then((response) => response.json())
             .then((data) => sendToTinybird(measureTransform(data['items'], station_id), 'rainfall_measures'));
     }
