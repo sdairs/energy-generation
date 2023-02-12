@@ -10,15 +10,13 @@ async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    console.log("handler")
     const since = dayjs().subtract(12, 'hour').format('YYYY-MM-DDTHH:mm:ss');
-    for (const station_id in station_ids) {
-        console.log(station_id)
-        const url = base_url + `/id/stations/${station_id}/readings?_sorted&since=${since}Z`;
+    for (const i in station_ids) {
+        const url = base_url + `/id/stations/${station_ids[i]}/readings?_sorted&since=${since}Z`;
         console.log(url)
         await fetch(url)
             .then((response) => response.json())
-            .then((data) => sendToTinybird(measureTransform(data['items'], station_id), 'rainfall_measures'));
+            .then((data) => sendToTinybird(measureTransform(data['items'], station_ids[i]), 'rainfall_measures'));
     }
     res.status(200).end();
 }
