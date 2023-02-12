@@ -21,15 +21,13 @@ async function handler(
 }
 
 function measureTransform(data: any, station_id: string) {
-    let transform: any[] = [];
-    data.forEach((item: any) => {
-        transform.push({
+    return data.map((item: any) => {
+        return {
             "station_id": station_id,
             "time_from": item.dateTime,
             "measure": item.value
-        });
-    })
-    return transform;
+        }
+    });
 }
 
 async function sendToTinybird(data: any, datasource: string) {
