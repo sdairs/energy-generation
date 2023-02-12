@@ -13,7 +13,6 @@ async function handler(
     const since = dayjs().subtract(12, 'hour').format('YYYY-MM-DDTHH:mm:ss');
     for (const i in station_ids) {
         const url = base_url + `/id/stations/${station_ids[i]}/readings?_sorted&since=${since}Z`;
-        console.log(url)
         await fetch(url)
             .then((response) => response.json())
             .then((data) => sendToTinybird(measureTransform(data['items'], station_ids[i]), 'rainfall_measures'));
@@ -34,16 +33,14 @@ function measureTransform(data: any, station_id: string) {
 }
 
 async function sendToTinybird(data: any, datasource: string) {
-    console.log("sendToTinybird")
-    console.log(data.map(JSON.stringify).join('\n'))
-    await fetch(
+    fetch(
         `https://api.tinybird.co/v0/events?name=${datasource}`,
         {
             method: 'POST',
             body: data.map(JSON.stringify).join('\n'),
             headers: { Authorization: `Bearer ${process.env.TINYBIRD_TOKEN}` }
         }
-    ).then((response) => console.log(response.status));
+    );
 }
 
 export default verifySignature(handler);
