@@ -41,7 +41,7 @@ export default function Home() {
         <script defer
           src="https://unpkg.com/@tinybirdco/flock.js"
           data-host="https://api.tinybird.co"
-          data-token="p.eyJ1IjogIjg3ZjVjZDJjLWQ4MzItNDUxNC1hMGY4LWY0MGRkMGRiZTE4NiIsICJpZCI6ICIwOTE3NzFhMS0zNTFiLTQ2OTAtODIxMi00ZDNiNDY1YmM5MGEifQ.O9BpdRaZsYyCox1qUfYHdB19fpT9NMK1C5D6FVjuIsw"
+          data-token="p.eyJ1IjogIjY4NGU3Yjc3LWFjZWItNGE2YS1iOGZmLTUxN2YwNDY4ZDhjOCIsICJpZCI6ICJlZjRhMDdjNS04ZTc3LTRkNGMtODMyZi1jMmE2ZThkNTE4ZWEifQ.1JIiTDWfmfCPY1d1FJSERDhLlEXW11s2UUJ7je6KAOY"
         />
       }
 
