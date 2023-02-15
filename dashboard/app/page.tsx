@@ -37,6 +37,14 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      {(process.env.VERCEL_ENV && process.env.VERCEL_ENV === 'production') &&
+        <script defer
+          src="https://unpkg.com/@tinybirdco/flock.js"
+          data-host="https://api.tinybird.co"
+          data-token="p.eyJ1IjogIjg3ZjVjZDJjLWQ4MzItNDUxNC1hMGY4LWY0MGRkMGRiZTE4NiIsICJpZCI6ICIwOTE3NzFhMS0zNTFiLTQ2OTAtODIxMi00ZDNiNDY1YmM5MGEifQ.O9BpdRaZsYyCox1qUfYHdB19fpT9NMK1C5D6FVjuIsw"
+        />
+      }
+
     </main>
   )
 }
