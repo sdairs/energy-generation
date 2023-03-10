@@ -13,7 +13,7 @@ export default async function handler(
     } else {
         const r = range!.toString();
         if (ranges.includes(r)) {
-            const data = await fetch(`https://api.tinybird.co/v0/pipes/generation_mix_api.json?token=p.eyJ1IjogIjc4ZmVhOGY5LTkzNzYtNDQzMC1iNTUwLTA0YTU5MWM2ZTFjZSIsICJpZCI6ICJiYWFhZWNiYy1kMjk0LTQyM2QtOTc0Ny1lZjBiNDQyMDFmYTMifQ.wkD8QpT_oXE5UqEB92a9APCZOhBx_mN92PpWu3lkMQI&range=${r}`)
+            const data = await fetch(`https://api.tinybird.co/v0/pipes/generation_mix_api.json?token=${process.env.TINYBIRD_READ_TOKEN}&range=${r}`)
                 .then((response) => response.json())
                 .then((data) => data);
             response.status(200).json(data);
