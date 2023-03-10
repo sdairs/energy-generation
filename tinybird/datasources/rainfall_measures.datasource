@@ -1,0 +1,10 @@
+TOKEN data_ingest APPEND
+
+SCHEMA >
+    `measure` Float32 `json:$.measure`,
+    `station_id` String `json:$.station_id`,
+    `time_from` DateTime `json:$.time_from`
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYear(time_from)"
+ENGINE_SORTING_KEY "station_id, time_from"

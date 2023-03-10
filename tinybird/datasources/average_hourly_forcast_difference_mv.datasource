@@ -1,4 +1,3 @@
-# Data Source created from Pipe 'average_hourly_forcast_difference_materialize'
 
 SCHEMA >
     `hour` DateTime,

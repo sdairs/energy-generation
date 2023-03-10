@@ -1,0 +1,12 @@
+TOKEN data_ingest APPEND
+
+SCHEMA >
+    `lat` Float32,
+    `long` Float32,
+    `station_id` String,
+    `region_name` String,
+    `easting` Int64,
+    `grid_reference` String
+
+ENGINE "MergeTree"
+ENGINE_SORTING_KEY "region_name"

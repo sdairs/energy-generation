@@ -3,19 +3,19 @@ SQL >
 
     SELECT
         toStartOfMonth(time_from) AS time_from,
-        floor(toFloat32(avg(coal)), 1) AS coal,
-        floor(toFloat32(avg(gas)), 1) AS gas,
-        floor(toFloat32(avg(fossils)), 1) AS fossils,
-        floor(toFloat32(avg(hydro)), 1) AS hydro,
-        floor(toFloat32(avg(solar)), 1) AS solar,
-        floor(toFloat32(avg(wind)), 1) AS wind,
-        floor(toFloat32(avg(renewables)), 1) AS renewables,
-        floor(toFloat32(avg(other)), 1) AS other,
-        floor(toFloat32(avg(imports)), 1) AS imports,
-        floor(toFloat32(avg(nuclear)), 1) AS nuclear,
-        floor(toFloat32(avg(biomass)), 1) AS biomass,
-        floor(toFloat32(avg(other_sources)), 1) AS other_sources
-    FROM daily_generation_mix_avg_mv
+        avgState(coal) AS coal,
+        avgState(gas) AS gas,
+        avgState(generation.coal + generation.gas) AS fossils,
+        avgState(hydro) AS hydro,
+        avgState(solar) AS solar,
+        avgState(wind) AS wind,
+        avgState((generation.hydro + generation.solar) + generation.wind) AS renewables,
+        avgState(other) AS other,
+        avgState(imports) AS imports,
+        avgState(nuclear) AS nuclear,
+        avgState(biomass) AS biomass,
+        avgState(((generation.other + generation.imports) + generation.nuclear) + generation.biomass) AS other_sources
+    FROM generation
     GROUP BY time_from
     ORDER BY time_from ASC
 

@@ -1,0 +1,18 @@
+NODE mv
+SQL >
+
+    SELECT
+        toStartOfMonth(time_from) AS time_from,
+        avgState(measure) AS measure,
+        station_id
+    FROM rainfall_measures
+    GROUP BY
+        station_id,
+        time_from
+
+TYPE materialized
+DATASOURCE monthly_rainfall_per_station_avg_mv
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYear(time_from)"
+ENGINE_SORTING_KEY "station_id, time_from"
+

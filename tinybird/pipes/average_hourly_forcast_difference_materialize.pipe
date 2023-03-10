@@ -10,7 +10,5 @@ SQL >
 
 TYPE materialized
 DATASOURCE average_hourly_forcast_difference_mv
-ENGINE "AggregatingMergeTree"
-ENGINE_PARTITION_KEY "toYear(hour)"
-ENGINE_SORTING_KEY "hour"
+
 
