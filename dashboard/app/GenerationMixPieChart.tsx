@@ -21,7 +21,7 @@ export default function GenerationMixPieChart() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('https://api.tinybird.co/v0/pipes/generation_mix_api.json?token=p.eyJ1IjogIjc4ZmVhOGY5LTkzNzYtNDQzMC1iNTUwLTA0YTU5MWM2ZTFjZSIsICJpZCI6ICJiYWFhZWNiYy1kMjk0LTQyM2QtOTc0Ny1lZjBiNDQyMDFmYTMifQ.wkD8QpT_oXE5UqEB92a9APCZOhBx_mN92PpWu3lkMQI&latest=true');
+            const res = await fetch('/api/energy/get_generation_mix?range=latest');
             const { data } = await res.json();
             const keys = ["coal", "gas", "hydro", "solar", "wind", "biomass", "nuclear", "other", "imports"];
             let transform: any = [];
