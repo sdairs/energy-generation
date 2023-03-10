@@ -104,18 +104,15 @@ SQL >
     %
     SELECT *
     FROM
-    {% if defined(latest) %}
-    latest
-    {% elif defined(day) %}
-    one_day
-    {% elif defined(week) %}
-    one_week
-    {% elif defined(year) %}
-    one_year
-    {% elif defined(decade) %}
-    one_decade
-    {% else %}
-    one_day
-    {% end %}
+        {% if defined(range) %}
+            {% if range == 'latest' %} latest
+            {% elif range == 'day' %} one_day
+            {% elif range == 'week' %} one_week
+            {% elif range == 'year' %} one_year
+            {% elif range == 'decade' %} one_decade
+            {% else %} one_day
+            {% end %}
+        {% else %} one_day
+        {% end %}
 
 
