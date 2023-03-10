@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import dayjs from 'dayjs';
 
 const ranges: string[] = ['day', 'week', 'year', 'decade', 'latest'];
 
