@@ -20,7 +20,7 @@ export default function GenerationMixLineChart() {
     const [selectedTime, setSelectedTime] = useState('day');
 
     async function fetchData(time: string) {
-        const res = await fetch(`/api/get_generation_mix?range=${time}`);
+        const res = await fetch(`/api/energy/get_generation_mix?range=${time}`);
         const { data } = await res.json();
         console.log(data)
         setChartdata(data)

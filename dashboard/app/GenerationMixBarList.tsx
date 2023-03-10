@@ -20,7 +20,7 @@ export default function GenerationMixBarList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch('/api/get_generation_mix?range=latest');
+      const res = await fetch('/api/energy/get_generation_mix?range=latest');
       const { data } = await res.json();
       // Fossils
       set_fossils_total(data[0]['fossils']);
