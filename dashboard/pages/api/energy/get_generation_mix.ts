@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 const ranges: string[] = ['day', 'week', 'year', 'decade', 'latest'];
 
-async function handler(
+export default async function handler(
     request: NextApiRequest,
     response: NextApiResponse
 ) {
