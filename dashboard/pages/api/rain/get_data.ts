@@ -17,7 +17,7 @@ async function handler(
             .then((response) => response.json())
             .then((data) => sendToTinybird(measureTransform(data['items'], station_ids[i]), 'rainfall_measures'));
     }
-    res.status(200).end();
+    res.status(200).send({});
 }
 
 function measureTransform(data: any, station_id: string) {
