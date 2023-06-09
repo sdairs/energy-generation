@@ -1,15 +1,14 @@
-import './globals.css'
-import '@tremor/react/dist/esm/tremor.css';
+import "./globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="light" className='bg-stone-50'>
+    <html lang="en">
       <head />
       <body>{children}</body>
     </html>
-  )
+  );
 }
