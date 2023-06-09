@@ -1,63 +1,95 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Block, Flex, Title, Toggle, Color, ToggleItem, Card, AreaChart } from "@tremor/react";
+import { useState, useEffect } from "react";
+import {
+  Flex,
+  Title,
+  TabGroup,
+  TabList,
+  Tab,
+  AreaChart,
+  Color,
+  Card,
+} from "@tremor/react";
 
 const categoryColorMap: Record<string, Color> = {
-    coal: "zinc",
-    gas: "slate",
-    hydro: "lime",
-    solar: "green",
-    wind: "emerald",
-    biomass: "cyan",
-    nuclear: "sky",
-    other: "blue",
-    imports: "orange",
+  coal: "zinc",
+  gas: "slate",
+  hydro: "lime",
+  solar: "green",
+  wind: "emerald",
+  biomass: "cyan",
+  nuclear: "sky",
+  other: "blue",
+  imports: "orange",
 };
+
+const times = ["day", "week", "year", "decade"];
 
 export default function GenerationMixLineChart() {
-    const [chartdata, setChartdata] = useState([]);
-    const [selectedTime, setSelectedTime] = useState('day');
+  const [chartdata, setChartdata] = useState([]);
+  const [selectedTime, setSelectedTime] = useState(0);
 
-    async function fetchData(time: string) {
-        const res = await fetch(`/api/energy/get_generation_mix?range=${time}`);
-        const { data } = await res.json();
-        console.log(data)
-        setChartdata(data)
-    }
+  const areaChartArgs = {
+    className: "mt-5 h-72",
+    data: chartdata,
+    index: "time_from",
+    categories: Object.keys(categoryColorMap),
+    colors: Object.values(categoryColorMap),
+    showLegend: false,
+    yAxisWidth: 56,
+  };
 
-    useEffect(() => {
-        fetchData('day');
-    }, []);
+  async function fetchData(index: number) {
+    const res = await fetch(
+      `/api/energy/get_generation_mix?range=${times[index]}`
+    );
+    const { data } = await res.json();
+    setSelectedTime(index);
+    console.log(data);
+    setChartdata(data);
+  }
 
-    return (
-        <Card>
-            <div className="md:flex justify-between">
-                <Block>
-                    <Flex justifyContent="justify-start" spaceX="space-x-0.5" alignItems="items-center">
-                        <Title> Generation Mix Over Time </Title>
-                    </Flex>
-                </Block>
-                <div className="mt-6 md:mt-0">
-                    <Toggle
-                        color="zinc"
-                        defaultValue={selectedTime}
-                        onValueChange={(value) => fetchData(value)}
-                    >
-                        <ToggleItem value="day" text="Day" />
-                        <ToggleItem value="week" text="Week" />
-                        <ToggleItem value="year" text="Year" />
-                        <ToggleItem value="decade" text="Decade" />
-                    </Toggle>
-                </div>
-            </div>
-            <AreaChart
-                dataKey="time_from"
-                data={chartdata}
-                categories={["coal", "gas", "hydro", "solar", "wind", "biomass", "nuclear", "other", "imports"]}
-                colors={Object.values(categoryColorMap)}
-            />
-        </Card>
+  useEffect(() => {
+    fetchData(0);
+  }, []);
 
-    )
-};
+  return (
+    <Card>
+      <div className="md:flex justify-between">
+        <div>
+          <Flex
+            className="space-x-0.5"
+            justifyContent="start"
+            alignItems="center"
+          >
+            <Title> Generation Mix Over Time </Title>
+          </Flex>
+        </div>
+        <div>
+          <TabGroup index={selectedTime} onIndexChange={fetchData}>
+            <TabList color="gray" variant="solid">
+              <Tab>Day</Tab>
+              <Tab>Week</Tab>
+              <Tab>Year</Tab>
+              <Tab>Decade</Tab>
+            </TabList>
+          </TabGroup>
+        </div>
+      </div>
+      {/* web */}
+      <div className="mt-8 hidden sm:block">
+        <AreaChart {...areaChartArgs} />
+      </div>
+      {/* mobile */}
+      <div className="mt-8 sm:hidden">
+        <AreaChart
+          {...areaChartArgs}
+          startEndOnly={true}
+          showGradient={false}
+          showYAxis={false}
+        />
+      </div>
+    </Card>
+  );
+}

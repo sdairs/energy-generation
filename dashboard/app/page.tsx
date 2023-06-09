@@ -11,7 +11,7 @@ export default function Home() {
     <main className={inter.className}>
 
       <div className="grid grid-rows-1 grid-flow-col gap-4 mx-8">
-        <h1 className="text-center text-3xl my-8 text-black">UK Energy Generation</h1>
+        <h1 className="text-center text-3xl my-8">UK Energy Generation</h1>
       </div>
 
       <div className="grid grid-rows-1 grid-flow-col gap-4 mx-8 mt-2">
