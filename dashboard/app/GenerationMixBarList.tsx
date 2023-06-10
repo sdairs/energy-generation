@@ -8,6 +8,7 @@ import {
   AccordionHeader,
   AccordionBody,
   AccordionList,
+  Title
 } from "@tremor/react";
 
 export default function GenerationMixBarList() {
@@ -64,6 +65,7 @@ export default function GenerationMixBarList() {
 
   return (
     <Card>
+      <Title className="mb-2">Latest Generation Mix</Title>
       <AccordionList>
         <Accordion defaultOpen={true}>
           <AccordionHeader>Fossils ({fossils_total}%)</AccordionHeader>
