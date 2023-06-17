@@ -25,4 +25,7 @@ export const getGenerationMix = tb.buildPipe({
     biomass: z.number(),
     other_sources: z.number(),
   }),
+  opts: {
+    revalidate: 1800
+  }
 });
