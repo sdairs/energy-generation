@@ -8,6 +8,7 @@ import {
   AccordionHeader,
   AccordionBody,
   AccordionList,
+  Title
 } from "@tremor/react";
 
 export default function GenerationMixBarList() {
@@ -22,6 +23,7 @@ export default function GenerationMixBarList() {
     const fetchData = async () => {
       const res = await fetch("/api/energy/get_generation_mix?range=latest");
       const { data } = await res.json();
+
       // Fossils
       set_fossils_total(data[0]["fossils"]);
       const fossils_keys = ["coal", "gas"];
@@ -33,6 +35,7 @@ export default function GenerationMixBarList() {
         });
       });
       set_fossils_data(fossils_transform);
+
       // Renewables
       set_renewables_total(data[0]["renewables"]);
       const renewables_keys = ["hydro", "solar", "wind"];
@@ -44,6 +47,7 @@ export default function GenerationMixBarList() {
         });
       });
       set_renewables_data(renewables_transform);
+
       // Others
       set_other_total(data[0]["other_sources"]);
       const other_keys = ["biomass", "nuclear", "other"];
@@ -61,6 +65,7 @@ export default function GenerationMixBarList() {
 
   return (
     <Card>
+      <Title className="mb-2">Latest Generation Mix</Title>
       <AccordionList>
         <Accordion defaultOpen={true}>
           <AccordionHeader>Fossils ({fossils_total}%)</AccordionHeader>

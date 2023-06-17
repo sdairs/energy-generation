@@ -47,7 +47,7 @@ export default function GenerationMixPieChart() {
 
   return (
     <Card>
-      <Title>Latest Generation Mix</Title>
+      <Title className="mb-2">Latest Generation Mix</Title>
       <div className="mt-24 h-auto">
         <DonutChart
           data={chartdata}

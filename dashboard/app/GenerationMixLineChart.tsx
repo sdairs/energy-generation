@@ -46,7 +46,6 @@ export default function GenerationMixLineChart() {
     );
     const { data } = await res.json();
     setSelectedTime(index);
-    console.log(data);
     setChartdata(data);
   }
 
